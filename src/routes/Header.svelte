@@ -5,6 +5,11 @@
 </script>
 
 <header>
+	<script
+		defer
+		data-domain="chartmaker.a-wels.de"
+		src="https://plausible.a-wels.de/js/script.js"
+	></script>
 	<div class="corner">
 		<a href="https://kit.svelte.dev">
 			<img src={logo} alt="SvelteKit" />
