@@ -22,10 +22,10 @@ jobs:
       - name: Deploy
         uses: easingthemes/ssh-deploy@v2
         with:
-          server_ip: ${{ secrets.SERVER_IP }}
-          server_port: ${{ secrets.SERVER_PORT }}
-          remote_username: ${{ secrets.SERVER_USERNAME }}
-          remote_private_key: ${{ secrets.DEPLOY_SSH_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.SERVER_IP }}
+          REMOTE_PORT: ${{ secrets.SERVER_PORT }}
+          REMOTE_USER: ${{ secrets.SERVER_USERNAME }}
           source: ./build/
           target: /var/www/chartmaker
           args: -avz --delete
