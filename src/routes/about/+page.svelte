@@ -8,8 +8,7 @@
 
 	<p>
 		This is a simple application to create animation charts. Simply set the width of the chart, add
-		boxes as you like and drag them around to create your chart. The code will be made available on
-		Codeberg soon.
+		boxes as you like and drag them around to create your chart. The code is available on <a href="https://github.com/A-wels/animation-chart-maker/"> Github </a>.
 	</p>
 
 	<h2>Current features</h2>
