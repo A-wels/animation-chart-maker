@@ -142,8 +142,8 @@
 <svelte:window bind:innerWidth />
 <div class="menubar">
 	<div class="row">
-		<button on:click={addBox}>Add Box</button>
-		<button on:click={removeBox}>Remove Box</button>
+		<button on:click={addBox}>Add frame</button>
+		<button on:click={removeBox}>Remove frame</button>
 		<label>
 			<input type="checkbox" bind:checked={$alternate} />
 			Alternate numbers
