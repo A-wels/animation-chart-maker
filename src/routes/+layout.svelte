@@ -11,8 +11,16 @@
 	</main>
 
 	<footer>
+		<p style="text-align: center">
+			Feature requests and bug reports are appreciated! <br />
+			Please use the
+			<a href="https://github.com/A-wels/animation-chart-maker/issues"> issue tracker</a> or
+			<a href="mailto:chartmaker@a-wels.de">Email me</a>
+		</p>
 		<p>Made by <a href="https://a-wels.de">Alexander Welsing</a></p>
-		<p><a href="/impressum"> Impressum</a> and <a href="/privacy"> Privacy policy</a></p>
+		<p style="font-size: small">
+			<a href="/impressum"> Impressum</a> and <a href="/privacy"> Privacy policy</a>
+		</p>
 	</footer>
 </div>
 
