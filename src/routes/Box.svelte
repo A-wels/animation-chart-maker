@@ -6,7 +6,6 @@
 	let movable = posX === 0 || posX === 100 ? false : true;
 	// get total width of canvas and calculate percentage
 	let offsetX = posX === 100 ? '-5px' : '0px';
-	console.log(posX);
 </script>
 
 <div

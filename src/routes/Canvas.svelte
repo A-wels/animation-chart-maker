@@ -25,7 +25,6 @@
 	// get screen width and calculate percentage
 
 	function dragStart(event) {
-		console.log(event.target.className);
 		if (event.target.className.includes('movable')) {
 			xOffset =
 				event.target.style.transform === ''
