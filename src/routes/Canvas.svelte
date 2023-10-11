@@ -61,6 +61,24 @@
 		}
 	}
 
+	function clampAndInterpolate(values, targetRange = [0, 50]) {
+		const min = Math.min(...values);
+		const max = Math.max(...values);
+
+		if (min === max) {
+			// Avoid division by zero
+			const middle = (targetRange[0] + targetRange[1]) / 2;
+			return values.map(() => middle);
+		}
+
+		const clampedValues = values.map(
+			(value) => ((value - min) / (max - min)) * (targetRange[1] - targetRange[0]) + targetRange[0]
+		);
+		clampedValues.shift();
+
+		return clampedValues;
+	}
+
 	function setTranslate(xPos) {
 		dragTarget.style.transform = 'translate3d(' + xPos + 'px, 0, 0)';
 	}
@@ -82,14 +100,18 @@
 				positions.push((100 / (boxCount + 1)) * i);
 			}
 		} else if (selectedDistribution === 'SLO-IN') {
-			for (let i = boxCount; i > 0; i--) {
-				positions.unshift((50 / boxCount) * i);
+			for (let i = 1; i < boxCount + 2; i++) {
+				let pos = i ** 2;
+				positions.push(pos);
 			}
+			positions = clampAndInterpolate(positions);
 		} else if (selectedDistribution === 'SLO-OUT') {
-			for (let i = 0; i < boxCount; i++) {
-				let stepsize = 50 / boxCount;
-				positions.push(50 + stepsize * i);
+			for (let i = 1; i < boxCount + 2; i++) {
+				let pos = i ** 2;
+				positions.push(pos);
 			}
+			positions = clampAndInterpolate(positions, [100, 50]);
+			positions.reverse();
 		}
 	}
 	distribution.subscribe((value) => {
