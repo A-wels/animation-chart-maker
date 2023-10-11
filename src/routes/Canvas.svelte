@@ -25,7 +25,6 @@
 	// get screen width and calculate percentage
 
 	function dragStart(event) {
-		console.log(event.target.className);
 		if (event.target.className.includes('movable')) {
 			xOffset =
 				event.target.style.transform === ''
@@ -61,6 +60,27 @@
 		}
 	}
 
+	function clampAndInterpolate(values, targetRange = [0, 50]) {
+		const min = Math.min(...values);
+		const max = Math.max(...values);
+
+		if (min === max) {
+			// Avoid division by zero
+			const middle = (targetRange[0] + targetRange[1]) / 2;
+			return values.map(() => middle);
+		}
+
+		let clampedValues = values.map(
+			(value) => ((value - min) / (max - min)) * (targetRange[1] - targetRange[0]) + targetRange[0]
+		);
+		clampedValues.shift();
+		clampedValues.pop();
+		// remove 0 and 100 values
+		clampedValues = clampedValues.filter((item) => item !== 0 && item !== 100);
+
+		return clampedValues;
+	}
+
 	function setTranslate(xPos) {
 		dragTarget.style.transform = 'translate3d(' + xPos + 'px, 0, 0)';
 	}
@@ -82,14 +102,50 @@
 				positions.push((100 / (boxCount + 1)) * i);
 			}
 		} else if (selectedDistribution === 'SLO-IN') {
-			for (let i = boxCount; i > 0; i--) {
-				positions.unshift((50 / boxCount) * i);
+			for (let i = 1; i < boxCount + 2; i++) {
+				let pos = i ** 2;
+				positions.push(pos);
 			}
+			positions = clampAndInterpolate(positions);
+			positions.unshift(50);
 		} else if (selectedDistribution === 'SLO-OUT') {
-			for (let i = 0; i < boxCount; i++) {
-				let stepsize = 50 / boxCount;
-				positions.push(50 + stepsize * i);
+			for (let i = 1; i < boxCount + 2; i++) {
+				let pos = i ** 2;
+				positions.push(pos);
 			}
+			positions = clampAndInterpolate(positions, [100, 50]);
+			positions.reverse();
+			positions.unshift;
+		} else if (selectedDistribution === 'SLO-IN + SLO-OUT') {
+			let temp = 0;
+			for (let i = 1; i < boxCount + 2; i++) {
+				let pos = i ** 2;
+				if (i % 2 === 0) {
+					temp = pos;
+				} else {
+					positions.push(temp);
+					positions.push(pos);
+				}
+			}
+			console.log(positions);
+
+			let left = clampAndInterpolate(positions, [0, 150]);
+			// right: 100-left[i]
+			let right = left.map((item) => 100 - item);
+			positions = [];
+			for (let i = 0; i < left.length - 1; i++) {
+				positions.push(left[i]);
+				positions.push(right[i]);
+			}
+			positions.unshift(50);
+			positions = positions.filter((item, index) => positions.indexOf(item) === index);
+			// cut off after number of boxes
+			positions = positions.slice(0, boxCount);
+			positions.sort((a, b) => a - b);
+
+			console.log('left: ' + left);
+			console.log('right: ' + right);
+			console.log(positions);
 		}
 	}
 	distribution.subscribe((value) => {

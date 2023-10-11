@@ -1,9 +1,8 @@
 <script>
 	import { distribution } from './stores.js';
-	let options = ['Equal', 'SLO-IN', 'SLO-OUT'];
+	let options = ['Equal', 'SLO-IN', 'SLO-OUT', 'SLO-IN + SLO-OUT'];
 	export let selected = 'Equal';
 	function change() {
-		console.log(selected);
 		distribution.set(selected);
 	}
 </script>
