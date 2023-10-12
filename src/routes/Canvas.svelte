@@ -178,21 +178,29 @@
 <svelte:window bind:innerWidth />
 <div class="menubar">
 	<div class="row">
-		<button on:click={addBox}>Add frame</button>
-		<button on:click={removeBox}>Remove frame</button>
-		<button on:click={() => (boxCount = 2)}>Reset</button>
-		<label>
+		<div>
+			<button on:click={addBox}>Add frame</button>
+			<button on:click={removeBox}>Remove frame</button>
+			<button on:click={() => (boxCount = 2)}>Reset</button>
+			<button on:click={saveChart}>Save Chart</button>
+		</div>
+	</div>
+	<div class="row">
+		<DistributionRadio />
+		<label id="alternatecheck">
 			<input type="checkbox" bind:checked={$alternate} />
 			Alternate numbers
 		</label>
-		<DistributionRadio />
-		<button on:click={saveChart}>Save Chart</button>
 	</div>
 	<div class="row">
-		<label>
-			<input type="range" min="100" max={innerWidth * 0.8} step="1" bind:value={width} />
-			Width of Line: {width}px
-		</label>
+		<div style="text-align: center;">
+			<label>
+				<input type="range" min="100" max={innerWidth * 0.8} step="1" bind:value={width} />
+				<div>
+					Width of Line: {Math.round(width)}px
+				</div>
+			</label>
+		</div>
 	</div>
 </div>
 <div id="chart">
@@ -250,5 +258,14 @@
 		width: fit-content;
 		margin: 0 auto;
 		padding: 10px;
+	}
+	button {
+		margin: 4px;
+		border-radius: 8px;
+		padding: 4px;
+		background-color: #ff3e00;
+	}
+	#alternatecheck {
+		margin-left: 10px;
 	}
 </style>
