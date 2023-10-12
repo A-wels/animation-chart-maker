@@ -6,16 +6,24 @@
 	let movable = posX === 0 || posX === 100 ? false : true;
 	// get total width of canvas and calculate percentage
 	let offsetX = 0; // posX === 100 ? '-5px' : '0px';
+	let isBreakdown = false;
+	function toggleBreakdown(event) {
+		event.preventDefault();
+		isBreakdown = !isBreakdown;
+	}
 </script>
 
 <div
 	style="transform: translate3d({offsetX}, 0px, 0px);"
 	style:left="{posX}%"
 	class="animBox {movable ? 'movable' : 'fixed'}"
+	on:contextmenu={toggleBreakdown}
 >
 	<div
 		class="text {movable ? '' : 'circle'}"
-		style="top: {$alternate && id % 2 === 0 ? 54 : -24}px"
+		style="top: {$alternate && id % 2 === 0 ? 54 : -24}px; {isBreakdown && movable
+			? 'border-bottom: 2px solid #000;'
+			: ''}"
 	>
 		{id}
 	</div>
@@ -33,6 +41,7 @@
 		position: relative;
 		left: -5px;
 		width: 15px;
+		height: 16px;
 		font-size: 14px;
 		font-weight: bold;
 		-webkit-touch-callout: none;

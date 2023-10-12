@@ -206,6 +206,7 @@
 <div id="chart">
 	<div
 		class="canvas"
+		oncontextmenu="return false;"
 		on:mousedown={dragStart}
 		on:touchstart={dragStart}
 		on:mousemove={drag}
