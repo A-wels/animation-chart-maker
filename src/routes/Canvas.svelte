@@ -180,6 +180,7 @@
 	<div class="row">
 		<button on:click={addBox}>Add frame</button>
 		<button on:click={removeBox}>Remove frame</button>
+		<button on:click={() => (boxCount = 2)}>Reset</button>
 		<label>
 			<input type="checkbox" bind:checked={$alternate} />
 			Alternate numbers
