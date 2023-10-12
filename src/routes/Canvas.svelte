@@ -6,7 +6,7 @@
 	import { onMount } from 'svelte';
 	import html2canvas from 'html2canvas';
 
-	let boxCount = 0;
+	let boxCount = 2;
 	let boxCountMax = 49;
 	let positions = [0];
 	let selectedDistribution = 'Equal';
@@ -60,29 +60,50 @@
 		}
 	}
 
-	function clampAndInterpolate(values, targetRange = [0, 50]) {
-		const min = Math.min(...values);
-		const max = Math.max(...values);
-
-		if (min === max) {
-			// Avoid division by zero
-			const middle = (targetRange[0] + targetRange[1]) / 2;
-			return values.map(() => middle);
-		}
-
-		let clampedValues = values.map(
-			(value) => ((value - min) / (max - min)) * (targetRange[1] - targetRange[0]) + targetRange[0]
-		);
-		clampedValues.shift();
-		clampedValues.pop();
-		// remove 0 and 100 values
-		clampedValues = clampedValues.filter((item) => item !== 0 && item !== 100);
-
-		return clampedValues;
-	}
-
 	function setTranslate(xPos) {
 		dragTarget.style.transform = 'translate3d(' + xPos + 'px, 0, 0)';
+	}
+
+	function equalDistribution() {
+		// calculate positions: boxCount boxes with equal distance on positions 0-100. Boxcount includes start and end. If boxCount = 2 -> only start and end box
+		let pos = [];
+		let step = 100 / (boxCount - 1);
+		for (let i = 0; i < boxCount; i++) {
+			pos.push(step * i);
+		}
+		// remove first and last element -> always on the line
+		pos.shift();
+		pos.pop();
+		return pos;
+	}
+	function sloInDistribution() {
+		let posList = [50];
+
+		for (let i = 1; i < boxCount - 2; i++) {
+			posList.unshift(posList[0] / 2);
+		}
+		return posList;
+	}
+
+	function sloOutDistribution() {
+		let posList = [50];
+		for (let i = 1; i < boxCount - 2; i++) {
+			posList.push(50 + posList[posList.length - 1] / 2);
+		}
+		return posList;
+	}
+
+	function sloInSloOutDistribution() {
+		let pos = [50];
+		for (let i = 0; i < boxCount - 3; i++) {
+			if (i % 2 === 0) {
+				pos.unshift(pos[0] / 2);
+			} else {
+				pos.push(50 + pos[pos.length - 1] / 2);
+			}
+		}
+		console.log(pos);
+		return pos;
 	}
 
 	function updatePositions() {
@@ -98,54 +119,13 @@
 		}
 
 		if (selectedDistribution === 'Equal') {
-			for (let i = 1; i <= boxCount; ++i) {
-				positions.push((100 / (boxCount + 1)) * i);
-			}
+			positions = equalDistribution();
 		} else if (selectedDistribution === 'SLO-IN') {
-			for (let i = 1; i < boxCount + 2; i++) {
-				let pos = i ** 2;
-				positions.push(pos);
-			}
-			positions = clampAndInterpolate(positions);
-			positions.unshift(50);
+			positions = sloInDistribution();
 		} else if (selectedDistribution === 'SLO-OUT') {
-			for (let i = 1; i < boxCount + 2; i++) {
-				let pos = i ** 2;
-				positions.push(pos);
-			}
-			positions = clampAndInterpolate(positions, [100, 50]);
-			positions.reverse();
-			positions.unshift;
+			positions = sloOutDistribution();
 		} else if (selectedDistribution === 'SLO-IN + SLO-OUT') {
-			let temp = 0;
-			for (let i = 1; i < boxCount + 2; i++) {
-				let pos = i ** 2;
-				if (i % 2 === 0) {
-					temp = pos;
-				} else {
-					positions.push(temp);
-					positions.push(pos);
-				}
-			}
-			console.log(positions);
-
-			let left = clampAndInterpolate(positions, [0, 150]);
-			// right: 100-left[i]
-			let right = left.map((item) => 100 - item);
-			positions = [];
-			for (let i = 0; i < left.length - 1; i++) {
-				positions.push(left[i]);
-				positions.push(right[i]);
-			}
-			positions.unshift(50);
-			positions = positions.filter((item, index) => positions.indexOf(item) === index);
-			// cut off after number of boxes
-			positions = positions.slice(0, boxCount);
-			positions.sort((a, b) => a - b);
-
-			console.log('left: ' + left);
-			console.log('right: ' + right);
-			console.log(positions);
+			positions = sloInSloOutDistribution();
 		}
 	}
 	distribution.subscribe((value) => {
@@ -161,7 +141,7 @@
 	}
 
 	function removeBox() {
-		if (boxCount > 0) {
+		if (boxCount > 2) {
 			boxCount--;
 			updatePositions();
 		}
@@ -225,8 +205,8 @@
 		on:touchend={dragEnd}
 		style="width: {width}px"
 	>
-		<Line numberOfBoxes={positions.length + 2} />
-		{#each Array(boxCount) as _, i}
+		<Line numberOfBoxes={boxCount} />
+		{#each Array(boxCount - 2) as _, i}
 			<AnimBox posX={positions[i]} id={i + 2} />
 		{/each}
 	</div>
