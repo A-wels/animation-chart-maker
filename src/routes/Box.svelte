@@ -5,7 +5,7 @@
 	export let id = 10;
 	let movable = posX === 0 || posX === 100 ? false : true;
 	// get total width of canvas and calculate percentage
-	let offsetX = posX === 100 ? '-5px' : '0px';
+	let offsetX = 0; // posX === 100 ? '-5px' : '0px';
 </script>
 
 <div
@@ -13,7 +13,12 @@
 	style:left="{posX}%"
 	class="animBox {movable ? 'movable' : 'fixed'}"
 >
-	<div class="text" style="top: {$alternate && id % 2 === 0 ? 50 : -15}px">{id}</div>
+	<div
+		class="text {movable ? '' : 'circle'}"
+		style="top: {$alternate && id % 2 === 0 ? 54 : -24}px"
+	>
+		{id}
+	</div>
 </div>
 
 <style>
@@ -25,8 +30,9 @@
 		border: '1px solid ' + --var(bordercolor, #000000);
 	}
 	.text {
-		position: absolute;
-		left: 0;
+		position: relative;
+		left: -5px;
+		width: 15px;
 		font-size: 14px;
 		font-weight: bold;
 		-webkit-touch-callout: none;
@@ -35,5 +41,16 @@
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+		text-align: center;
+	}
+	.circle {
+		left: -7px;
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		color: #000;
+		text-align: center;
+		background: transparent;
+		border: 1px solid #000;
 	}
 </style>
