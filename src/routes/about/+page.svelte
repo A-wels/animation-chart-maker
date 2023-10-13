@@ -43,5 +43,5 @@
 <h2>License</h2>
 This software is created using Svelte, which uses the MIT License. In the spirit of open source, this software and all images created with it are also licensed under the <a href="https://opensource.org/license/mit/">MIT License</a>. This license allows for the use in any way you want, but I provide no warranty and I have no liability for any problems that may arise through the use of this tool. <b> I'd appreciate a mention if you used this tool for a project or a simple message telling me about your project. Though this is in no way mandatory </b>
 <h2>Tips</h2>
-If you <b>really</b> like this tool, you can send me some spare change. Again, this is in no way mandatory. <a href="https://www.paypal.me/A-Wels Software">https://www.paypal.me/awelsSoftware</a>
+If you <b>really</b> like this tool, you can send me some spare change. Again, this is in no way mandatory. <a href="https://www.paypal.me/A-WelsSoftware">https://www.paypal.me/awelsSoftware</a>
 </div>
