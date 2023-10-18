@@ -1,14 +1,16 @@
 <script>
 	import { distribution } from './stores.js';
-	let options = ['Equal', 'SLO-IN', 'SLO-OUT', 'SLO-IN + SLO-OUT'];
+	import { DistributionOptions } from './DistributionRadio.js';
+
 	export let selected = 'Equal';
+
 	function change() {
 		distribution.set(selected);
 	}
 </script>
 
 <div class="distributionRadio">
-	{#each options as option}
+	{#each Object.values(DistributionOptions) as option}
 		<div class="distributionOption">
 			<label>
 				<input type="radio" bind:group={selected} value={option} on:change={change} />

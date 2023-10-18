@@ -1,11 +1,11 @@
 <script>
 	import AnimBox from './Box.svelte';
-	export let numberOfBoxes = 2;
+	import { boxCount } from './stores.js';
 </script>
 
 <div class="line" />
 <AnimBox posX={0} id={1} />
-<AnimBox posX={100} id={numberOfBoxes} />
+<AnimBox posX={100} id={$boxCount} />
 
 <style>
 	.line {
