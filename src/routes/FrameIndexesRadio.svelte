@@ -1,20 +1,19 @@
 <script>
-	import { distribution } from '$lib/stores.js';
-	import { DistributionOptions } from './DistributionRadio.js';
-
-	export let selected = DistributionOptions.Equal;
-
+	import { frameIndexesOption } from '$lib/Distributions.js';
+	import { frameIndexes } from '$lib/stores.js';
+	let selected = 'Ones';
 	function change() {
-		distribution.set(selected);
+		frameIndexes.set(selected);
 	}
 </script>
 
 <div class="distributionRadio">
-	{#each Object.values(DistributionOptions) as option}
+	<div>Frames on:</div>
+	{#each Object.entries(frameIndexesOption) as option}
 		<div class="distributionOption">
 			<label>
-				<input type="radio" bind:group={selected} value={option} on:change={change} />
-				{option}
+				<input type="radio" bind:group={selected} value={option[1]} on:change={change} />
+				{option[1]}
 			</label>
 		</div>
 	{/each}
@@ -24,6 +23,7 @@
 	.distributionRadio {
 		display: flex;
 		flex-wrap: wrap;
+		margin-top: 10px;
 	}
 
 	.distributionOption {

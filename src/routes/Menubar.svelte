@@ -5,19 +5,23 @@
 		boxCount,
 		positions as positionsStore,
 		distribution,
-		width
-	} from './stores.js';
+		width,
+		frameIndexes,
+		startIndex
+	} from '../lib/stores.js';
 	import { saveChart } from './Canvas.js';
 	import { DistributionOptions } from './DistributionRadio.js';
 	import { equalDistribution, slowInDist, slowOutDist, slowInOutDist } from '$lib/Distributions.js';
+	import FrameIndexesRadio from './FrameIndexesRadio.svelte';
 
 	export let innerWidth = 500;
 	let selectedDistribution = DistributionOptions.Equal;
-
 	boxCount.subscribe((value) => {
 		updatePositions();
 	});
-
+	frameIndexes.subscribe((value) => {
+		updatePositions();
+	});
 	function addBox() {
 		boxCount.update((n) => n + 1);
 	}
@@ -33,7 +37,6 @@
 		// reset transforms of movable boxes
 		try {
 			let boxes = document.querySelectorAll('.movable');
-			console.log(boxes);
 			boxes.forEach((box) => {
 				box.style.transform = '';
 			});
@@ -84,9 +87,24 @@
 			<label>
 				<input type="range" min="100" max={innerWidth * 0.8} step="1" bind:value={$width} />
 				<div>
-					Width of Line: {$width}px
+					Width of line: {$width}px
 				</div>
 			</label>
+		</div>
+	</div>
+	<div class="row">
+		<div style="text-align: center;">
+			<label>
+				First frame: <input
+					type="number"
+					id="startindexInput"
+					min="0"
+					max="100"
+					step="1"
+					bind:value={$startIndex}
+				/>
+			</label>
+			<FrameIndexesRadio />
 		</div>
 	</div>
 </div>
@@ -112,5 +130,9 @@
 		border-radius: 8px;
 		padding: 4px;
 		background-color: #ff3e00;
+	}
+	#startindexInput {
+		width: 50px;
+		padding-left: 8px;
 	}
 </style>

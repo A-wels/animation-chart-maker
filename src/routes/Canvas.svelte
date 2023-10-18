@@ -1,9 +1,10 @@
 <script>
 	import AnimBox from './Box.svelte';
 	import Line from './Line.svelte';
-	import { width, positions, boxCount } from './stores.js';
+	import { width, positions, boxCount, startIndex, frameIndexes } from '$lib/stores.js';
 	import { onMount } from 'svelte';
 	import Menubar from './Menubar.svelte';
+	import { getFrameIndex } from '$lib/Distributions.js';
 
 	$: innerWidth = 0;
 
@@ -74,7 +75,7 @@
 	>
 		<Line />
 		{#each Array($boxCount - 2) as _, i}
-			<AnimBox posX={$positions[i]} id={i + 2} />
+			<AnimBox posX={$positions[i]} id={getFrameIndex(i + 1 + $startIndex, $frameIndexes)} />
 		{/each}
 	</div>
 </div>

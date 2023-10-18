@@ -1,8 +1,8 @@
 <script>
 	//https://svelte.dev/repl/75d34e46cbe64bb68b7c2ac2c61931ce?version=4.2.1
-	import { alternate } from './stores.js';
+	import { alternate } from '$lib/stores.js';
 	export let posX = 0;
-	export let id = 10;
+	export let id = -1;
 	let movable = posX === 0 || posX === 100 ? false : true;
 	// get total width of canvas and calculate percentage
 	let offsetX = 0; // posX === 100 ? '-5px' : '0px';

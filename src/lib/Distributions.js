@@ -1,3 +1,15 @@
+import { startIndex } from '$lib/stores.js';
+export const frameIndexesOption = {
+	ones: 'Ones',
+	twos: 'Twos',
+	threes: 'Threes',
+	fives: 'Fives'
+};
+let sIndex = 1;
+
+startIndex.subscribe((val) => {
+	sIndex = val;
+});
 export function equalDistribution(boxCount) {
 	// calculate positions: boxCount boxes with equal distance on positions 0-100. Boxcount includes start and end. If boxCount = 2 -> only start and end box
 	let pos = [];
@@ -37,4 +49,27 @@ export function slowInOutDist(boxCount) {
 		}
 	}
 	return pos;
+}
+
+export function getFrameIndex(frame, index) {
+	console.log('Index: ' + index);
+	console.log('Frame: ' + frame + '\n');
+	let result = 1;
+	switch (index) {
+		case frameIndexesOption.ones:
+			result = frame;
+			break;
+		case frameIndexesOption.twos:
+			result = sIndex + (frame - sIndex) * 2;
+			break;
+		case frameIndexesOption.threes:
+			result = sIndex + (frame - sIndex) * 3;
+			break;
+
+		case frameIndexesOption.fives:
+			result = sIndex + (frame - sIndex) * 5;
+			break;
+	}
+	console.log('Result: ' + result);
+	return result;
 }

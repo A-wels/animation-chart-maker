@@ -1,11 +1,12 @@
 <script>
 	import AnimBox from './Box.svelte';
-	import { boxCount } from './stores.js';
+	import { boxCount, startIndex, frameIndexes } from '$lib/stores.js';
+	import { getFrameIndex } from '$lib/Distributions.js';
 </script>
 
 <div class="line" />
-<AnimBox posX={0} id={1} />
-<AnimBox posX={100} id={$boxCount} />
+<AnimBox posX={0} id={$startIndex} />
+<AnimBox posX={100} id={getFrameIndex($boxCount + $startIndex - 1, $frameIndexes)} />
 
 <style>
 	.line {
