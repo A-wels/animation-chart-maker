@@ -10,27 +10,32 @@
 	let offsetX = 0; // posX === 100 ? '-5px' : '0px';
 	let isBreakdown = false;
 	function toggleBreakdown(event) {
+		console.log('toggleBreakdown');
 		event.preventDefault();
 		isBreakdown = !isBreakdown;
 	}
 </script>
 
 <div
-	class="outer-container movable"
+	class="outer-container {movable ? 'movable' : 'fixed'} "
 	style="left: {posX}%; transform: translate3d({offsetX}, 0px, 0px);"
+	on:contextmenu={toggleBreakdown}
 >
-	<div class="animBox {movable ? 'movable' : 'fixed'}" on:contextmenu={toggleBreakdown} />
+	<div class="animBox {movable ? 'movable' : 'fixed'}" />
 	<div
 		class="centered-text {movable ? '' : 'circle'}"
-		style="top: {$alternate && id % 2 != 0 ? 54 : -44}px; {isBreakdown && movable
-			? 'border-bottom: 2px solid #000;'
-			: ''}"
+		style="top: {$alternate && id % 2 != 0 ? 44 : -44}px; "
 	>
-		{display_id}
+		<p style={isBreakdown && movable ? 'border-bottom: 2px solid #000;' : ''}>{display_id}</p>
 	</div>
 </div>
 
 <style>
+	p {
+		font-size: 14px;
+		font-weight: bold;
+		line-height: 1;
+	}
 	.animBox {
 		width: 5px;
 		height: 50px;
@@ -40,19 +45,15 @@
 	}
 	.centered-text {
 		position: absolute;
-		width: 100%; /* Occupy the entire width of the container */
-		height: 100%; /* Occupy the entire height of the container */
 		display: flex;
 		align-items: center; /* Vertically center the text */
 		justify-content: center; /* Horizontally center the text */
-		font-weight: bold;
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
-		font-size: 14px;
 	}
 	.circle {
 		position: absolute;
