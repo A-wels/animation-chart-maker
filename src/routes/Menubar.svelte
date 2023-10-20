@@ -17,6 +17,9 @@
 	export let innerWidth = 500;
 	let selectedDistribution = DistributionOptions.Equal;
 	boxCount.subscribe((value) => {
+		if (value === null || value < 2) {
+			boxCount.set(2);
+		}
 		updatePositions();
 	});
 	frameIndexes.subscribe((value) => {
@@ -71,6 +74,9 @@
 		<div>
 			<button on:click={addBox}>Add frame</button>
 			<button on:click={removeBox}>Remove frame</button>
+			<label>
+				<input id="frameInput" type="number" min="2" max="100" step="1" bind:value={$boxCount} />
+			</label>
 			<button on:click={() => boxCount.set(2)}>Reset</button>
 			<button on:click={saveChart}>Save Chart</button>
 		</div>
@@ -134,5 +140,8 @@
 	#startindexInput {
 		width: 50px;
 		padding-left: 8px;
+	}
+	#frameInput {
+		width: 50px;
 	}
 </style>

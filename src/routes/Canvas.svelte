@@ -8,6 +8,12 @@
 
 	$: innerWidth = 0;
 
+	startIndex.subscribe((value) => {
+		if (value === null || value < 0) {
+			startIndex.set(0);
+		}
+	});
+
 	onMount(() => {
 		width.set(Math.round(innerWidth * 0.8 * 0.5).toString());
 	});
@@ -55,7 +61,7 @@
 	}
 
 	function setTranslate(xPos) {
-		dragTarget.style.transform = 'translate3d(' + xPos + 'px, 0, 0)';
+		dragTarget.offsetParent.style.transform = 'translate3d(' + xPos + 'px, 0, 0)';
 	}
 </script>
 
@@ -75,7 +81,11 @@
 	>
 		<Line />
 		{#each Array($boxCount - 2) as _, i}
-			<AnimBox posX={$positions[i]} id={getFrameIndex(i + 1 + $startIndex, $frameIndexes)} />
+			<AnimBox
+				posX={$positions[i]}
+				display_id={getFrameIndex(i + 1 + $startIndex, $frameIndexes)}
+				id={i + 1}
+			/>
 		{/each}
 	</div>
 </div>

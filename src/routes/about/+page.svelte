@@ -31,6 +31,8 @@
 		<li>Save chart as image</li>
 		<li>Automatically mark keyframes</li>
 		<li>Manually mark breakdown frames with rightclick</li>
+		<li>Change counting of frames to ones/twos/threes/fours/fives</li>
+		<li>Change number of first frame</li>
 	</ul>
 
 	<h2>Planned features</h2>
@@ -40,8 +42,21 @@
 		<li>Directly insert into image</li>
 		<li>MAYBE: Edit TVPP files</li>
 	</ul>
-<h2>License</h2>
-This software is created using Svelte, which uses the MIT License. In the spirit of open source, this software and all images created with it are also licensed under the <a href="https://opensource.org/license/mit/">MIT License</a>. This license allows for the use in any way you want, but I provide no warranty and I have no liability for any problems that may arise through the use of this tool. <b> I'd appreciate a mention if you used this tool for a project or a simple message telling me about your project. Though this is in no way mandatory </b>
-<h2>Tips</h2>
-If you <b>really</b> like this tool, you can send me some spare change. Again, this is in no way mandatory. <a href="https://www.paypal.me/awelsSoftware">https://www.paypal.me/awelsSoftware</a>
+	<h2>License</h2>
+	<p>
+		This software is created using Svelte, which uses the MIT License. In the spirit of open source,
+		this software and all images created with it are also licensed under the <a
+			href="https://opensource.org/license/mit/">MIT License</a
+		>. This license allows for the use in any way you want, but I provide no warranty and I have no
+		liability for any problems that may arise through the use of this tool.
+		<b>
+			I'd appreciate a mention if you used this tool for a project or a simple message telling me
+			about your project. Though this is in no way mandatory
+		</b>
+	</p>
+	<h2>Tips</h2>
+	<p>
+		If you<b>really</b> like this tool, you can send me some spare change. Again, this is in no way
+		mandatory. <a href="https://www.paypal.me/awelsSoftware">https://www.paypal.me/awelsSoftware</a>
+	</p>
 </div>

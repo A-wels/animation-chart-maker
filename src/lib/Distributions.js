@@ -3,6 +3,7 @@ export const frameIndexesOption = {
 	ones: 'Ones',
 	twos: 'Twos',
 	threes: 'Threes',
+	fours: 'Fours',
 	fives: 'Fives'
 };
 let sIndex = 1;
@@ -52,8 +53,6 @@ export function slowInOutDist(boxCount) {
 }
 
 export function getFrameIndex(frame, index) {
-	console.log('Index: ' + index);
-	console.log('Frame: ' + frame + '\n');
 	let result = 1;
 	switch (index) {
 		case frameIndexesOption.ones:
@@ -65,11 +64,13 @@ export function getFrameIndex(frame, index) {
 		case frameIndexesOption.threes:
 			result = sIndex + (frame - sIndex) * 3;
 			break;
+		case frameIndexesOption.fours:
+			result = sIndex + (frame - sIndex) * 4;
+			break;
 
 		case frameIndexesOption.fives:
 			result = sIndex + (frame - sIndex) * 5;
 			break;
 	}
-	console.log('Result: ' + result);
 	return result;
 }
