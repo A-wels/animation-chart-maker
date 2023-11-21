@@ -7,7 +7,9 @@
 		distribution,
 		width,
 		frameIndexes,
-		startIndex
+		startIndex,
+		rotate,
+		flip
 	} from '../lib/stores.js';
 	import { saveChart } from './Canvas.js';
 	import { DistributionOptions } from './DistributionRadio.js';
@@ -16,6 +18,12 @@
 
 	export let innerWidth = 500;
 	let selectedDistribution = DistributionOptions.Equal;
+
+	rotate.subscribe((value) => {
+		// Reset positions to prevent issues with the rotation
+		updatePositions();
+	});
+
 	boxCount.subscribe((value) => {
 		if (value === null || value < 2) {
 			boxCount.set(2);
@@ -83,9 +91,19 @@
 	</div>
 	<div class="row">
 		<DistributionRadio />
-		<label id="alternatecheck">
+	</div>
+	<div class="row">
+		<label id="alternatecheck" class="check">
 			<input type="checkbox" bind:checked={$alternate} />
 			Alternate numbers
+		</label>
+		<label id="rotatecheck" class="check">
+			<input type="checkbox" bind:checked={$rotate} />
+			Rotate 90°
+		</label>
+		<label id="flipcheck" class="check">
+			<input type="checkbox" bind:checked={$flip} />
+			Flip number position
 		</label>
 	</div>
 	<div class="row">
@@ -130,6 +148,10 @@
 		justify-content: center;
 		align-items: center;
 		margin: 10px;
+	}
+
+	.check {
+		padding: 4px;
 	}
 	button {
 		margin: 4px;
