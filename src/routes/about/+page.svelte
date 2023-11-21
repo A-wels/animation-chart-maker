@@ -30,14 +30,15 @@
 		</ul>
 		<li>Save chart as image</li>
 		<li>Automatically mark keyframes</li>
-		<li>Manually mark breakdown frames with rightclick</li>
+		<li>Manually mark breakdown frames with rightclick or long tap</li>
 		<li>Change counting of frames to ones/twos/threes/fours/fives</li>
 		<li>Change number of first frame</li>
+  <li>Change side of frame numbers</li>
+  <li>Rotate chart 90°</li>
 	</ul>
 
 	<h2>Planned features</h2>
 	<ul>
-		<li>More presets</li>
 		<li>Add image preview</li>
 		<li>Directly insert into image</li>
 		<li>MAYBE: Edit TVPP files</li>
@@ -51,7 +52,7 @@
 		liability for any problems that may arise through the use of this tool.
 		<b>
 			I'd appreciate a mention if you used this tool for a project or a simple message telling me
-			about your project. Though this is in no way mandatory
+			about your project. Though this is in no way mandatory.
 		</b>
 	</p>
 	<h2>Tips</h2>
