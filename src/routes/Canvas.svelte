@@ -67,12 +67,12 @@
 				currentX = event.clientX - initialX;
 				currentY = event.clientY - initialY;
 			}
-			xOffset = currentX;
-			yOffset = currentY;
+			xOffset = Math.max(-parseFloat($width) / 2, Math.min(currentX, parseFloat($width) / 2));
+			yOffset = Math.max(-parseFloat($width) / 2, Math.min(currentY, parseFloat($width) / 2));
 			if ($rotate) {
-				setTranslate(currentY);
+				setTranslate(yOffset);
 			} else {
-				setTranslate(currentX);
+				setTranslate(xOffset);
 			}
 		}
 	}

@@ -6,7 +6,11 @@
 
 <div class="line" />
 <AnimBox posX={0} display_id={$startIndex} id={0} />
-<AnimBox posX={100} display_id={getFrameIndex($boxCount + $startIndex - 1, $frameIndexes)} />
+<AnimBox
+	posX={100}
+	display_id={getFrameIndex($boxCount + $startIndex - 1, $frameIndexes)}
+	id={$boxCount - 1}
+/>
 
 <style>
 	.line {
